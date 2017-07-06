@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
  * 实际上使用的 DefaultTestContextBootstrapper
  */
 @ContextConfiguration(classes = FooImpl.class)
-public class FooImplTest_NoBoot2 extends AbstractTestNGSpringContextTests {
+public class FooNoBoot2Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private Foo foo;

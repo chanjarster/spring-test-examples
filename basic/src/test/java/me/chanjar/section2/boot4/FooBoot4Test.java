@@ -1,4 +1,4 @@
-package me.chanjar.section2.boot3;
+package me.chanjar.section2.boot4;
 
 import me.chanjar.section2.service.Foo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 /**
- * 利用外部Configuration提供Foo Bean
+ * Spring Boot测试的例子
  */
-@SpringBootTest(classes = FooConfiguration.class)
-public class FooImplTest_Boot3 extends AbstractTestNGSpringContextTests {
+@SpringBootTest(classes = BootConfiguration.class)
+public class FooBoot4Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private Foo foo;

@@ -1,21 +1,20 @@
-package me.chanjar.section2.boot2;
+package me.chanjar.section2.boot1;
 
 import me.chanjar.section2.service.Foo;
-import me.chanjar.section2.service.FooImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 /**
- * 内嵌的@Configuration提供了Foo Bean
+ * 测试类本身就是@SpringBootApplication，会启用@EnableAutoConfiguration
  */
 @SpringBootTest
-public class FooImplTest_Boot2 extends AbstractTestNGSpringContextTests {
+@SpringBootApplication(scanBasePackageClasses = Foo.class)
+public class FooBoot1Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private Foo foo;
@@ -26,16 +25,6 @@ public class FooImplTest_Boot2 extends AbstractTestNGSpringContextTests {
 
     foo.plusCount();
     assertEquals(foo.getCount(), 1);
-  }
-
-  @Configuration
-  public static class FooConfiguration {
-
-    @Bean
-    public Foo foo() {
-      return new FooImpl();
-    }
-
   }
 
 }
