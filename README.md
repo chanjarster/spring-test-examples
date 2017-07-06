@@ -58,6 +58,7 @@ Spring提供的[Unit Test Utils][doc-spring-unit-test-utils]有以下这些：
 1. XmlExpectationsHelper
 1. XpathExpectationsHelper
 1. ModelAndViewAssert
+1. JdbcTestUtils
 
 [doc-spring-framework-testing]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
