@@ -1,11 +1,8 @@
 package me.chanjar.section2.boot4;
 
-import me.chanjar.section2.service.Foo;
+import me.chanjar.section2.service.FooService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * 读取另一个类的
- */
-@SpringBootApplication(scanBasePackageClasses = Foo.class)
+@SpringBootApplication(scanBasePackageClasses = FooService.class)
 public interface BootConfiguration {
 }

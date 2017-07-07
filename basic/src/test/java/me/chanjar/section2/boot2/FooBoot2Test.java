@@ -1,7 +1,7 @@
 package me.chanjar.section2.boot2;
 
-import me.chanjar.section2.service.Foo;
-import me.chanjar.section2.service.FooImpl;
+import me.chanjar.section2.service.FooService;
+import me.chanjar.section2.service.FooServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -12,13 +12,13 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 /**
- * 内嵌的@Configuration提供了Foo Bean
+ * 使用内嵌@Configuration加载Bean
  */
 @SpringBootTest
 public class FooBoot2Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
-  private Foo foo;
+  private FooService foo;
 
   @Test
   public void testPlusCount() throws Exception {
@@ -32,8 +32,8 @@ public class FooBoot2Test extends AbstractTestNGSpringContextTests {
   public static class FooConfiguration {
 
     @Bean
-    public Foo foo() {
-      return new FooImpl();
+    public FooService foo() {
+      return new FooServiceImpl();
     }
 
   }

@@ -3,7 +3,7 @@ package me.chanjar.section2.service;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FooImpl implements Foo {
+public class FooServiceImpl implements FooService {
 
   private int count = 0;
 

@@ -1,6 +1,6 @@
 package me.chanjar.section2.boot6;
 
-import me.chanjar.section2.service.Foo;
+import me.chanjar.section2.service.FooService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
@@ -11,15 +11,15 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 /**
- * 测试类本身就是@SpringBootApplication，会启用@EnableAutoConfiguration
+ * 强制关闭Auto Configuration
  */
 @SpringBootTest
 @OverrideAutoConfiguration(enabled = false)
-@SpringBootApplication(scanBasePackageClasses = Foo.class)
+@SpringBootApplication(scanBasePackageClasses = FooService.class)
 public class FooBoot6Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
-  private Foo foo;
+  private FooService foo;
 
   @Test
   public void testPlusCount() throws Exception {

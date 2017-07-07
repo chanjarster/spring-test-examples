@@ -1,7 +1,7 @@
 package me.chanjar.section3.noboot1;
 
-import me.chanjar.section2.service.Foo;
-import me.chanjar.section2.service.FooImpl;
+import me.chanjar.section2.service.FooService;
+import me.chanjar.section2.service.FooServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.test.context.BootstrapWith;
@@ -16,11 +16,11 @@ import static org.testng.Assert.assertEquals;
  * 从@SpringBootTest抄来了@BootstrapWith(SpringBootTestContextBootstrapper.class)
  */
 @BootstrapWith(SpringBootTestContextBootstrapper.class)
-@ContextConfiguration(classes = FooImpl.class)
+@ContextConfiguration(classes = FooServiceImpl.class)
 public class FooNoBoot1Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
-  private Foo foo;
+  private FooService foo;
 
   @Test
   public void testPlusCount() throws Exception {

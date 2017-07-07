@@ -1,6 +1,6 @@
 package me.chanjar.section2.boot4;
 
-import me.chanjar.section2.service.Foo;
+import me.chanjar.section2.service.FooService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Spring Boot测试的例子
+ * 使用外部@SpringBootApplication加载Bean
  */
 @SpringBootTest(classes = BootConfiguration.class)
 public class FooBoot4Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
-  private Foo foo;
+  private FooService foo;
 
   @Test
   public void testPlusCount() throws Exception {

@@ -1,6 +1,6 @@
 package me.chanjar.section2.service;
 
-public interface Foo {
+public interface FooService {
 
   void plusCount();
 
