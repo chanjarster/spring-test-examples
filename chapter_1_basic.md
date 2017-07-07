@@ -43,7 +43,7 @@ public class FooTest {
 
 ## Section 2: Spring Boot Testing with TestNG
 
-前面我们使用了TestNG做了最简单的UT，那么在Spring Boot项目里，如何针对Bean做测试呢？其实你也可以像前面一样测，但是如果你需要利用Spring提供的依赖注入特性来做测试，改怎么做？
+前面我们使用了TestNG做了最简单的UT，那么在Spring Boot项目里，如何针对Bean做测试呢？其实你也可以像前面一样测，但是如果你需要利用Spring提供的依赖注入特性来做测试，该怎么做？
 
 为了说明Spring Boot下的TestNG测试，我们先提供了[FooService][src-FooService]及其实现[FooServiceImpl][src-FooServiceImpl]：
 
@@ -101,9 +101,9 @@ public class FooBoot1Test extends AbstractTestNGSpringContextTests {
 
 为了能够使用TestNG测试Spring代码，必须将测试类继承[AbstractTestNGSpringContextTests][javadoc-AbstractTestNGSpringContextTests]。
 
-在这里，我们把测试类变成了[@SpringBootApplication][javadoc-SpringBootApplication]，它使用了自动扫描机制`scanBasePackageClasses`来加载Bean。
+在这里，我们把测试类变成了[@SpringBootApplication][javadoc-SpringBootApplication]，它使用了自动扫描机制`scanBasePackageClasses`来加载Bean。并且标注了[@SpringBootTest][javadoc-SpringBootTest]来说明这是一个Spring Boot Test。
 
-其内在机制是是[@SpringBootTest][javadoc-SpringBootTest]在没有内嵌[@Configuration][javadoc-Configuration]，且没有指定`@SpringBootTest(classes=...)`的时候，会去尝试查找[@SpringBootConfiguration][javadoc-SpringBootConfiguration]，而[@SpringBootApplication][javadoc-SpringBootApplication]就是[@SpringBootConfiguration][javadoc-SpringBootConfiguration]。需要注意的是，同一个JVM中只能有一个[@SpringBootConfiguration][javadoc-SpringBootConfiguration]，如果有多个就启动不起来了。
+[@SpringBootTest][javadoc-SpringBootTest]的内在机制是：在没有内嵌[@Configuration][javadoc-Configuration]，且没有指定`@SpringBootTest(classes=...)`的时候，会去尝试查找[@SpringBootConfiguration][javadoc-SpringBootConfiguration]，而[@SpringBootApplication][javadoc-SpringBootApplication]就是[@SpringBootConfiguration][javadoc-SpringBootConfiguration]。需要注意的是，同一个JVM中只能有一个[@SpringBootConfiguration][javadoc-SpringBootConfiguration]，如果有多个就启动不起来了。
 
 [@SpringBootApplication][javadoc-SpringBootApplication]相比[@SpringBootConfiguration][javadoc-SpringBootConfiguration]多了些什么呢？我们看看其源码就会知道：
 
@@ -160,7 +160,7 @@ public class FooBoot2Test extends AbstractTestNGSpringContextTests {
 }
 ```
 
-在这里我们在[@SpringBootTest][javadoc-SpringBootTest]测试类里内嵌了[@Configuration][javadoc-Configuration]，和方式1不同的是，方式2没有使用自动扫描机制，而是使用[@Configuration][javadoc-Configuration]注册了Bean。
+在这里我们在[@SpringBootTest][javadoc-SpringBootTest]测试类里内嵌了[@Configuration][javadoc-Configuration]，和方式1不同的是，方式2没有使用自动扫描机制，而是使用内嵌[@Configuration][javadoc-Configuration]注册了Bean。
 
 ### 方式3：使用外部@Configuration加载Bean
 
@@ -216,6 +216,10 @@ public class FooBoot4Test extends AbstractTestNGSpringContextTests {
   }
 
 }
+
+@SpringBootApplication(scanBasePackageClasses = FooService.class)
+public interface BootConfiguration {
+}
 ```
 
 ### 方式5：使用外部@SpringBootConfiguration加载Bean
@@ -250,7 +254,7 @@ public interface BootConfiguration {
 }
 ```
 
-### 方式6：强制关闭Auto Configuration
+### 方式6：关闭Auto Configuration
 
 源代码见[FooBoot6Test][src-FooBoot6Test]
 
@@ -274,7 +278,7 @@ public class FooBoot6Test extends AbstractTestNGSpringContextTests {
 }
 ```
 
-在这里我们使用了[@OverrideAutoConfiguration][javadoc-OverrideAutoConfiguration]强制关闭了Auto Configuration。
+在这里我们使用了[@OverrideAutoConfiguration][javadoc-OverrideAutoConfiguration]关闭了Auto Configuration。
 
 ## Section 3: Spring Testing with TestNG
 
@@ -303,7 +307,7 @@ public class FooNoBoot1Test extends AbstractTestNGSpringContextTests {
 }
 ```
 
-在这里我们使用了[SpringBootTestContextBootstrapper][javadoc-SpringBootTestContextBootstrapper]，其实[@SpringBootTest][javadoc-SpringBootTest]使用的是就是[SpringBootTestContextBootstrapper][javadoc-SpringBootTestContextBootstrapper]，所以我们这里模拟了[@SpringBootTest][javadoc-SpringBootTest]的行为。
+在这里我们使用了[SpringBootTestContextBootstrapper][javadoc-SpringBootTestContextBootstrapper]，其实[@SpringBootTest][javadoc-SpringBootTest]使用的就是[SpringBootTestContextBootstrapper][javadoc-SpringBootTestContextBootstrapper]，所以我们这里模拟了[@SpringBootTest][javadoc-SpringBootTest]的行为。
 
 同时我们也使用了[@ContextConfiguration][javadoc-ContextConfiguration]来加载Bean。
 
