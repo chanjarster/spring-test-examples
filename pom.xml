@@ -10,6 +10,7 @@
 
   <modules>
     <module>basic</module>
+    <module>annotation</module>
   </modules>
   
   <properties>
@@ -22,6 +23,8 @@
     <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
     <mockito.version>1.9.5</mockito.version>
     <testng.version>6.8.7</testng.version>
+    <commons-lang3.version>3.5</commons-lang3.version>
+    <commons-collections4.version>4.1</commons-collections4.version>
 
     <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
     <maven.failsafe.plugin.version>2.19</maven.failsafe.plugin.version>
@@ -48,8 +51,21 @@
         <version>${testng.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons-collections4.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
+
 
   <repositories>
     <repository>
