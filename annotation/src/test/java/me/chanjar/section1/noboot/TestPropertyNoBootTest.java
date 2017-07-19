@@ -1,4 +1,4 @@
-package me.chanjar.section1.test_property_source;
+package me.chanjar.section1.noboot;
 
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -16,9 +16,9 @@ import static org.testng.Assert.assertEquals;
 @ContextConfiguration(classes = PropertySourceConfiguration.class)
 @TestPropertySource(
     properties = { "foo=xyz", "bar=uvw", "PATH=aaa", "java.runtime.name=bbb" },
-    locations = "classpath:/me/chanjar/section1/test_property_source/test-property-source.properties"
+    locations = "classpath:/me/chanjar/section1/noboot/test-property-source.properties"
 )
-public class TestPropertyOverrideTest extends AbstractTestNGSpringContextTests implements EnvironmentAware {
+public class TestPropertyNoBootTest extends AbstractTestNGSpringContextTests implements EnvironmentAware {
 
   private Environment environment;
 
