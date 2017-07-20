@@ -1,4 +1,4 @@
-# Spring & Spring Boot Testing with TestNG的N种方法
+# Testing Spring & Spring Boot with TestNG系列文章
 
 本人比较喜欢用TestNG做单元、集成测试，所以本文的例子都是基于TestNG的。
 而且Spring官方对于Testing的例子大多是基于JUnit的，所以本文也能够给TestNG爱好者提供一些有用的帮助。
