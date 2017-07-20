@@ -17,7 +17,6 @@
 1. [附录II Spring Test Utils][appendix_ii]
 
 
-[doc-spring-mock-objects]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mock-objects
 [doc-spring-test-utils]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#unit-testing-support-classes
 [chapter_0_concept]: chapter_0_concept.md
 [chapter_1_basic]: chapter_1_basic.md
