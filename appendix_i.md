@@ -35,3 +35,5 @@ Spring提供的[Mock Objects][doc-spring-mock-objects]有以下这些：
 1. MockServletContext
 1. MockSessionCookieConfig
 1. PassThroughFilterChain
+
+[doc-spring-mock-objects]: https://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/html/unit-testing.html#mock-objects
