@@ -249,8 +249,8 @@ public class ThinJsonTest extends AbstractTestNGSpringContextTests {
 [javadoc-BasicJsonTester]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/test/json/BasicJsonTester.html
 [javadoc-JacksonAutoConfiguration]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/autoconfigure/jackson/JacksonAutoConfiguration.html
 [github-springboot-jackson-datetime-example]: https://github.com/chanjarster/springboot-jackson-datetime-example
-[src-SimpleJsonTest]: src/test/java/me/chanjar/section3/boot1/SimpleJsonTest.java
-[src-JsonComponentJsonTest]: src/test/java/me/chanjar/section3/boot2/JsonComponentJsonTest.java
-[src-FooJsonComponent]: src/test/java/me/chanjar/section3/boot2/FooJsonComponent.java
+[src-SimpleJsonTest]: annotation/src/test/java/me/chanjar/section3/boot1/SimpleJsonTest.java
+[src-JsonComponentJsonTest]: annotation/src/test/java/me/chanjar/section3/boot2/JsonComponentJsonTest.java
+[src-FooJsonComponent]: annotation/src/test/java/me/chanjar/section3/boot2/FooJsonComponent.java
 [javadoc-JsonComponent]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/jackson/JsonComponent.html
 [src-ThinJsonTest]: src/test/java/me/chanjar/section3/boot3/ThinJsonTest.java
