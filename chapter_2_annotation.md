@@ -253,4 +253,4 @@ public class ThinJsonTest extends AbstractTestNGSpringContextTests {
 [src-JsonComponentJsonTest]: annotation/src/test/java/me/chanjar/section3/boot2/JsonComponentJsonTest.java
 [src-FooJsonComponent]: annotation/src/test/java/me/chanjar/section3/boot2/FooJsonComponent.java
 [javadoc-JsonComponent]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/jackson/JsonComponent.html
-[src-ThinJsonTest]: src/test/java/me/chanjar/section3/boot3/ThinJsonTest.java
+[src-ThinJsonTest]: annotation/src/test/java/me/chanjar/section3/boot3/ThinJsonTest.java
