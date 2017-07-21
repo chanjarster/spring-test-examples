@@ -11,6 +11,7 @@
   <modules>
     <module>basic</module>
     <module>annotation</module>
+    <module>mock</module>
   </modules>
   
   <properties>
