@@ -8,7 +8,7 @@
 1. [Chapter 0: 基本概念][chapter_0_concept]
 1. [Chapter 1: 基本用法][chapter_1_basic]
 1. [Chapter 2: Annotation测试工具][chapter_2_annotation]
-1. [Chapter 3: 使用Mock测试][chapter_3_mock]
+1. [Chapter 3: 使用Mockito][chapter_3_mockito]
 1. [Chapter 4: 测试数据库][chapter_4_db]
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
 1. [Chapter 6: 测试@Configuration][chapter_6_configuration]
@@ -21,7 +21,7 @@
 [chapter_0_concept]: chapter_0_concept.md
 [chapter_1_basic]: chapter_1_basic.md
 [chapter_2_annotation]: chapter_2_annotation.md
-[chapter_3_mock]: chapter_3_mock.md
+[chapter_3_mockito]: chapter_3_mockito.md
 [chapter_4_db]: chapter_4_db.md
 [chapter_5_mvc]: chapter_5_mvc.md
 [chapter_6_configuration]: chapter_6_configuration.md

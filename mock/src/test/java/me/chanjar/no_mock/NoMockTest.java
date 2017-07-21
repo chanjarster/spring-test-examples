@@ -1,7 +1,6 @@
 package me.chanjar.no_mock;
 
 import me.chanjar.common.Bar;
-import me.chanjar.common.FakeBar;
 import me.chanjar.common.FooImpl;
 import org.testng.annotations.Test;
 
@@ -32,6 +31,21 @@ public class NoMockTest {
     FooImpl foo = new FooImpl();
     foo.setBar(new FakeBar(Collections.singleton("123")));
     assertEquals(foo.checkCodeDuplicate("123"), true);
+
+  }
+
+  public class FakeBar implements Bar {
+
+    private final Set<String> codes;
+
+    public FakeBar(Set<String> codes) {
+      this.codes = codes;
+    }
+
+    @Override
+    public Set<String> getAllCodes() {
+      return codes;
+    }
 
   }
 

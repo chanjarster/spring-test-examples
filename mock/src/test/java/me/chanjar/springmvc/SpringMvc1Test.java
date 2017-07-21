@@ -1,7 +1,8 @@
-package me.chanjar.springweb;
+package me.chanjar.springmvc;
 
-import me.chanjar.common.Foo;
+import me.chanjar.common.Bar;
 import me.chanjar.common.FooController;
+import me.chanjar.common.FooImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -12,27 +13,28 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testng.annotations.Test;
 
-import static org.mockito.Matchers.anyString;
+import java.util.Collections;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(FooController.class)
-@ContextConfiguration(classes = { FooController.class })
+@ContextConfiguration(classes = { FooController.class, FooImpl.class })
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class SpringWeb2Test extends AbstractTestNGSpringContextTests {
+public class SpringMvc1Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private MockMvc mvc;
 
   @MockBean
-  private Foo foo;
+  private Bar bar;
 
   @Test
   public void testCheckCodeDuplicate1() throws Exception {
 
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(true);
+    when(bar.getAllCodes()).thenReturn(Collections.singleton("123"));
 
     this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
         .andExpect(status().isOk())
@@ -42,7 +44,7 @@ public class SpringWeb2Test extends AbstractTestNGSpringContextTests {
   @Test
   public void testCheckCodeDuplicate2() throws Exception {
 
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(false);
+    when(bar.getAllCodes()).thenReturn(Collections.singleton("321"));
 
     this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
         .andExpect(status().isOk())

@@ -1,42 +1,38 @@
-package me.chanjar.springbootweb;
+package me.chanjar.springmvc;
 
-import me.chanjar.common.Bar;
+import me.chanjar.common.Foo;
 import me.chanjar.common.FooController;
-import me.chanjar.common.FooImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@EnableWebMvc
-@AutoConfigureMockMvc
-@SpringBootTest(classes = { FooController.class, FooImpl.class })
+@WebMvcTest(FooController.class)
+@ContextConfiguration(classes = { FooController.class })
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class BootWeb1Test extends AbstractTestNGSpringContextTests {
+public class SpringMvc2Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private MockMvc mvc;
 
   @MockBean
-  private Bar bar;
+  private Foo foo;
 
   @Test
   public void testCheckCodeDuplicate1() throws Exception {
 
-    when(bar.getAllCodes()).thenReturn(Collections.singleton("123"));
+    when(foo.checkCodeDuplicate(anyString())).thenReturn(true);
 
     this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
         .andExpect(status().isOk())
@@ -46,7 +42,7 @@ public class BootWeb1Test extends AbstractTestNGSpringContextTests {
   @Test
   public void testCheckCodeDuplicate2() throws Exception {
 
-    when(bar.getAllCodes()).thenReturn(Collections.singleton("321"));
+    when(foo.checkCodeDuplicate(anyString())).thenReturn(false);
 
     this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
         .andExpect(status().isOk())

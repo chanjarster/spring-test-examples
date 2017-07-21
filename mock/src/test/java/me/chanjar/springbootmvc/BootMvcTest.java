@@ -1,4 +1,4 @@
-package me.chanjar.springbootweb;
+package me.chanjar.springbootmvc;
 
 import me.chanjar.common.Foo;
 import me.chanjar.common.FooController;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest(classes = { FooController.class })
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class BootWeb2Test extends AbstractTestNGSpringContextTests {
+public class BootMvcTest extends AbstractTestNGSpringContextTests {
 
   @Autowired
   private MockMvc mvc;
