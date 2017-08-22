@@ -10,9 +10,11 @@
 
 因为是集成测试，所以我们使用了``maven-failsafe-plugin``来跑，它和``maven-surefire-plugin``的差别在于，``maven-failsafe-plugin``只会搜索``*IT.java``来跑测试，而``maven-surefire-plugin``只会搜索``*Test.java``来跑测试。
 
+如果想要在maven打包的时候跳过集成测试，只需要``mvn clean install -DskipITs``。
+
 ## 被测试类
 
-先介绍一下被测试的类：
+先介绍一下被测试的类。
 
 [Foo.java][src-Foo.java]：
 
@@ -278,9 +280,9 @@ public class Boot_1_IT extends AbstractTransactionalTestNGSpringContextTests {
 }
 ```
 
-因为使用了Spring Boot来做集成测试的话，得益于其AutoConfiguration机制，不需要自己构建``DataSource`` 、``JdbcTemplate``和``PlatformTransactionManager``的Bean。
+因为使用了Spring Boot来做集成测试，得益于其AutoConfiguration机制，不需要自己构建``DataSource`` 、``JdbcTemplate``和``PlatformTransactionManager``的Bean。
 
-并且因为我们已经将``flyway-core``添加到了maven依赖中，Spring Boot利用flyway来帮助我们初始化数据库，我们需要做的仅仅是将sql文件放到classpath的``db/migration``目录下：
+并且因为我们已经将``flyway-core``添加到了maven依赖中，Spring Boot会利用flyway来帮助我们初始化数据库，我们需要做的仅仅是将sql文件放到classpath的``db/migration``目录下：
 
 ``V1.0.0__foo-ddl.sql``:
  
@@ -306,22 +308,21 @@ public void cleanDb() {
 1. flyway按照版本号顺序执行
 1. 在开发期间，只需要将sql文件放到db/migration目录下就可以了，不需要写类似``EmbeddedDatabaseBuilder.addScript()``这样的代码
 1. 基于以上三点，就能够将数据库初始化SQL语句也纳入到集成测试中来，保证代码配套的SQL语句的正确性
-1. 可以帮助你清空数据库，这在你使用非内存数据库的时候非常有用
+1. 可以帮助你清空数据库，这在你使用非内存数据库的时候非常有用，因为不管测试前还是测试后，你都需要一个干净的数据库
 
-## 相关资料
+## 参考文档
 
-Spring Testing Framework还提供了一些其他和JDBC、SQL相关的工具，相关信息见：
+本章节涉及到的Spring Testing Framework JDBC、SQL相关的工具：
 
 * [Transaction management][doc-spring-testing-tx]
 * [Executing SQL scripts][doc-spring-testing-sql]
 
-还有flyway的[官方文档][doc-flyway]。
+和flyway相关的：
 
-## 参考文档
-   
-* [Spring Framework Testing][doc-spring-framework-testing]
-* [Spring Boot Testing][doc-spring-boot-testing]
+* [flyway的官方文档][doc-flyway]
+* [flway和spring boot的集成][doc-spring-boot-flyway]
 
+[doc-spring-boot-flyway]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#howto-execute-flyway-database-migrations-on-startup
 [doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
 [doc-spring-testing-jdbc]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#integration-testing-support-jdbc

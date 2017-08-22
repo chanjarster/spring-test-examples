@@ -9,7 +9,7 @@
 1. [Chapter 1: 基本用法][chapter_1_basic]
 1. [Chapter 2: Annotation测试工具][chapter_2_annotation]
 1. [Chapter 3: 使用Mockito][chapter_3_mockito]
-1. [Chapter 4: 测试数据库][chapter_4_rdbs]
+1. [Chapter 4: 测试关系型数据库][chapter_4_rdbs]
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
 1. [Chapter 6: 测试@Configuration][chapter_6_configuration]
 1. [Chapter 7: 测试@AutoConfiguration][chapter_7_auto_configuration]
