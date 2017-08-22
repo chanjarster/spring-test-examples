@@ -12,6 +12,7 @@
     <module>basic</module>
     <module>annotation</module>
     <module>mock</module>
+    <module>rdbs</module>
   </modules>
   
   <properties>

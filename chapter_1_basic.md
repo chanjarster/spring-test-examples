@@ -371,5 +371,5 @@ PS. 对比一下和方式1的日志输出，看看有什么不一样。
 [javadoc-SpringBootTestContextBootstrapper]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/test/context/SpringBootTestContextBootstrapper.html
 [doc-testcontext-framework]: https://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/html/integration-testing.html#testcontext-framework
 [javadoc-ContextConfiguration]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/test/context/ContextConfiguration.html
-[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#testing
+[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing

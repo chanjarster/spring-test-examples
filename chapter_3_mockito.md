@@ -356,7 +356,7 @@ public class BootMvcTest extends AbstractTestNGSpringContextTests {
 * [Spring Boot Auto-configured Spring MVC tests][doc-web-mvc-test]
 * [Mockito][site-mockito]
 
-[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#testing
+[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
 [site-mockito]: http://site.mockito.org
 [src-Bar]: mock/src/main/java/me/chanjar/common/Bar.java
