@@ -173,7 +173,7 @@ public class SpringTest extends AbstractTestNGSpringContextTests {
 
 要注意，如果要启用Spring和Mockito，必须添加这么一行：`@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)`。
 
-## 例子4：撇号Spring Boot Test
+## 例子4：配合Spring Boot Test
 
 
 源代码[BootTest][src-BootTest]：
