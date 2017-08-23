@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class SpringMvc_1_Test extends AbstractTestNGSpringContextTests {
 
   @Autowired
-  private WebApplicationContext wac; // cached
+  private WebApplicationContext wac;
 
   private MockMvc mvc;
 
