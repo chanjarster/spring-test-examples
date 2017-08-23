@@ -11,8 +11,9 @@
 * [Chapter 3: 使用Mockito][chapter_3_mockito]
 * [Chapter 4: 测试关系型数据库][chapter_4_rdbs]
 * [Chapter 5: 测试Spring MVC][chapter_5_mvc]
-* [Chapter 6: 测试@Configuration][chapter_6_configuration]
-* [Chapter 7: 测试@AutoConfiguration][chapter_7_auto_configuration]
+* Chapter 6: 测试AOP
+* [Chapter 7: 测试@Configuration][chapter_6_configuration]
+* [Chapter 8: 测试@AutoConfiguration][chapter_7_auto_configuration]
 * [附录I Spring Mock Objects][appendix_i]
 * [附录II Spring Test Utils][appendix_ii]
 
