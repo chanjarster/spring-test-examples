@@ -147,12 +147,12 @@ public class MockitoTest {
 
 ## 例子3：配合Spring Test
 
-源代码[SpringTest][src-SpringTest]：
+源代码[Spring_1_Test][src-Spring_1_Test]：
 
 ```java
 @ContextConfiguration(classes = FooImpl.class)
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class SpringTest extends AbstractTestNGSpringContextTests {
+public class Spring_1_Test extends AbstractTestNGSpringContextTests {
 
   @MockBean
   private Bar bar;
@@ -173,15 +173,49 @@ public class SpringTest extends AbstractTestNGSpringContextTests {
 
 要注意，如果要启用Spring和Mockito，必须添加这么一行：`@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)`。
 
-## 例子4：配合Spring Boot Test
 
+## 例子4：配合Spring Test（多层依赖）
 
-源代码[BootTest][src-BootTest]：
+当Bean存在这种依赖关系当时候：`LooImpl -> FooImpl -> Bar`，我们应该怎么测试呢？
+
+按照Mock测试的原则，这个时候我们应该mock一个`Foo`对象，把这个注入到`LooImpl`对象里，就像例子3里的一样。
+
+不过如果你不想mock `Foo`而是想mock `Bar`的时候，其实做法和前面也差不多，Spring会自动将mock Bar注入到`FooImpl`中，然后将`FooImpl`注入到`LooImpl`中。
+
+源代码[Spring_2_Test][src-Spring_2_Test]:
 
 ```java
-@SpringBootTest(classes = { FooImpl.class })
+@ContextConfiguration(classes = { FooImpl.class, LooImpl.class })
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class BootTest extends AbstractTestNGSpringContextTests {
+public class Spring_2_Test extends AbstractTestNGSpringContextTests {
+
+  @MockBean
+  private Bar bar;
+
+  @Autowired
+  private Loo loo;
+
+  @Test
+  public void testCheckCodeDuplicate() throws Exception {
+
+    when(bar.getAllCodes()).thenReturn(Collections.singleton("123"));
+    assertEquals(loo.checkCodeDuplicate("123"), true);
+
+  }
+
+}
+```
+
+也就是说，得益于Spring Test Framework，我们能够很方便地对依赖关系中任意层级的任意Bean做mock。
+
+## 例子5：配合Spring Boot Test
+
+源代码[Boot_1_Test][src-Boot_1_Test]：
+
+```java
+@SpringBoot_1_Test(classes = { FooImpl.class })
+@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
+public class Boot_1_Test extends AbstractTestNGSpringContextTests {
 
   @MockBean
   private Bar bar;
@@ -200,160 +234,11 @@ public class BootTest extends AbstractTestNGSpringContextTests {
 }
 ```
 
-## MVC结合Mockito测试
-
-这里讲讲MVC的Mock测试怎么做，先来看要被我们测试的[FooController][src-FooController]：
-
-```java
-@Controller
-public class FooController {
-
-  @Autowired
-  private Foo foo;
-
-  @RequestMapping(path = "/foo/check-code-dup", method = RequestMethod.GET)
-  public ResponseEntity<Boolean> checkCodeDuplicate(@RequestParam String code) {
-
-    return new ResponseEntity<>(
-        Boolean.valueOf(foo.checkCodeDuplicate(code)),
-        HttpStatus.OK
-    );
-
-  }
-
-}
-```
-
-这个Controller里使用了[Foo][src-Foo]。
-
-### 例子1：Spring MVC 2
-
-源代码[SpringMvc1Test][src-SpringMvc1Test]：
-
-```java
-@WebMvcTest(FooController.class)
-@ContextConfiguration(classes = { FooController.class, FooImpl.class })
-@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class SpringMvc1Test extends AbstractTestNGSpringContextTests {
-
-  @Autowired
-  private MockMvc mvc;
-
-  @MockBean
-  private Bar bar;
-
-  @Test
-  public void testCheckCodeDuplicate1() throws Exception {
-
-    when(bar.getAllCodes()).thenReturn(Collections.singleton("123"));
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("true"));
-  }
-
-  @Test
-  public void testCheckCodeDuplicate2() throws Exception {
-
-    when(bar.getAllCodes()).thenReturn(Collections.singleton("321"));
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("false"));
-  }
-
-}
-```
-
-这个例子里，[FooController][src-FooController]使用的是真实的[FooImpl][src-FooImpl]，它使用了Mock [Bar][src-Bar]。其实我们可以直接使用Mock [Foo][src-Foo]来测试，见下面的例子。
-
-我们通过`@WebMvcTest(FooController.class)`来启用Mvc的Mock测试，这种测试是纯内存的，不会开启网络端口。然后利用`MockMvc`来做测试。
-
-### 例子2：Spring MVC 2
-
-源代码[SpringMvc2Test][src-SpringMvc2Test]：
-
-
-```java
-@WebMvcTest(FooController.class)
-@ContextConfiguration(classes = { FooController.class })
-@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class SpringMvc2Test extends AbstractTestNGSpringContextTests {
-
-  @Autowired
-  private MockMvc mvc;
-
-  @MockBean
-  private Foo foo;
-
-  @Test
-  public void testCheckCodeDuplicate1() throws Exception {
-
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(true);
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("true"));
-  }
-
-  @Test
-  public void testCheckCodeDuplicate2() throws Exception {
-
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(false);
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("false"));
-  }
-
-}
-```
-
-### 例子3：Spring Boot MVC
-
-源代码[BootMvcTest][src-BootMvcTest]：
-
-```java
-@EnableWebMvc
-@AutoConfigureMockMvc
-@SpringBootTest(classes = { FooController.class })
-@TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class BootMvcTest extends AbstractTestNGSpringContextTests {
-
-  @Autowired
-  private MockMvc mvc;
-
-  @MockBean
-  private Foo foo;
-
-  @Test
-  public void testCheckCodeDuplicate1() throws Exception {
-
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(true);
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("true"));
-  }
-
-  @Test
-  public void testCheckCodeDuplicate2() throws Exception {
-
-    when(foo.checkCodeDuplicate(anyString())).thenReturn(false);
-
-    this.mvc.perform(get("/foo/check-code-dup").param("code", "123"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("false"));
-  }
-
-}
-```
 
 ## 参考文档
    
 * [Spring Framework Testing][doc-spring-framework-testing]
 * [Spring Boot Testing][doc-spring-boot-testing]
-* [Spring Boot Auto-configured Spring MVC tests][doc-web-mvc-test]
 * [Mockito][site-mockito]
 
 [doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
@@ -365,9 +250,6 @@ public class BootMvcTest extends AbstractTestNGSpringContextTests {
 [src-FooImpl]: mock/src/main/java/me/chanjar/common/FooImpl.java
 [src-FakeBar]: mock/src/test/java/me/chanjar/no_mock/FakeBar.java
 [src-NoMockTest]: mock/src/test/java/me/chanjar/no_mock/NoMockTest.java
-[src-SpringTest]: mock/src/test/java/me/chanjar/spring/SpringTest.java
-[src-BootTest]: mock/src/test/java/me/chanjar/springboot/BootTest.java
-[src-BootMvcTest]: mock/src/test/java/me/chanjar/springbootmvc/BootMvcTest.java
-[src-SpringMvc1Test]: mock/src/test/java/me/chanjar/springmvc/SpringMvc1Test.java
-[src-SpringMvc2Test]: mock/src/test/java/me/chanjar/springmvc/SpringMvc2Test.java
-[doc-web-mvc-test]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-mvc-tests
+[src-Spring_1_Test]: mock/src/test/java/me/chanjar/spring1/Spring_1_Test.java
+[src-Spring_2_Test]: mock/src/test/java/me/chanjar/spring2/Spring_2_Test.java
+[src-Boot_1_Test]: mock/src/test/java/me/chanjar/springboot1/Boot_1_Test.java

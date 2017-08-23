@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
 
 @ContextConfiguration(classes = FooImpl.class)
 @TestExecutionListeners(listeners = MockitoTestExecutionListener.class)
-public class SpringTest extends AbstractTestNGSpringContextTests {
+public class Spring_1_Test extends AbstractTestNGSpringContextTests {
 
   @MockBean
   private Bar bar;

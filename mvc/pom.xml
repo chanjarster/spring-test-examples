@@ -9,7 +9,7 @@
   </parent>
 
   <groupId>me.chanjar</groupId>
-  <artifactId>spring-test-examples-mock</artifactId>
+  <artifactId>spring-test-examples-mvc</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -18,6 +18,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <dependency>

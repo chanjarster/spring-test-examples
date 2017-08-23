@@ -1,4 +1,4 @@
-package me.chanjar.common;
+package me.chanjar.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

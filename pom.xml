@@ -13,6 +13,7 @@
     <module>annotation</module>
     <module>mock</module>
     <module>rdbs</module>
+    <module>mvc</module>
   </modules>
   
   <properties>

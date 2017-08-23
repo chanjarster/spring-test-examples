@@ -231,6 +231,7 @@ public class ThinJsonTest extends AbstractTestNGSpringContextTests {
    
 * [Spring Framework Testing][doc-spring-framework-testing]
 * [Spring Boot Testing][doc-spring-boot-testing]
+* [Context configuration with test property sources][doc-test-property-source]
 
 [doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
@@ -254,3 +255,4 @@ public class ThinJsonTest extends AbstractTestNGSpringContextTests {
 [src-FooJsonComponent]: annotation/src/test/java/me/chanjar/section3/boot2/FooJsonComponent.java
 [javadoc-JsonComponent]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/jackson/JsonComponent.html
 [src-ThinJsonTest]: annotation/src/test/java/me/chanjar/section3/boot3/ThinJsonTest.java
+[doc-test-property-source]: https://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/html/integration-testing.html#testcontext-ctx-management-property-sources
