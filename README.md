@@ -32,7 +32,7 @@
 
 [chapter_1_intro]: chapter_1_intro.md
 [chapter_1_s1_testng]: chapter_1_s1_testng.md
-[chapter_1_s2_spring_testing]: chapter_1_s1_spring_testing.md
+[chapter_1_s2_spring_testing]: chapter_1_s2_spring_testing.md
 [chapter_1_s3_spring_boot_testing]: chapter_1_s3_spring_boot_testing.md
 
 [chapter_2_intro]: chapter_2_intro.md
