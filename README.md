@@ -6,7 +6,7 @@
 ## 章节列表
 
 1. [Chapter 0: 基本概念][chapter_0_concept]
-1. [Chapter 1: 基本用法][chapter_1_basic]
+1. Chapter 1: 基本用法
     1. [引言][chapter_1_intro]
     1. [认识TestNG][chapter_1_s1_testng]
     1. [使用Spring Testing工具][chapter_1_s2_spring_testing]
@@ -30,7 +30,6 @@
 [doc-spring-test-utils]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#unit-testing-support-classes
 [chapter_0_concept]: chapter_0_concept.md
 
-[chapter_1_basic]: chapter_1_basic.md
 [chapter_1_intro]: chapter_1_intro.md
 [chapter_1_s1_testng]: chapter_1_s1_testng.md
 [chapter_1_s2_spring_testing]: chapter_1_s1_spring_testing.md
