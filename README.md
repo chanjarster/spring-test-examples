@@ -17,6 +17,7 @@
     1. [@ActiveProfile][chapter_2_s2_active_profile]
     1. [@JsonTest][chapter_2_s3_json_test]
     1. [@OverrideAutoConfiguration][chapter_2_s4_override_auto_configuration]
+    1. [@TestConfiguration][chapter_2_s5_test_configuration]
 1. [Chapter 3: 使用Mockito][chapter_3_mockito]
 1. [Chapter 4: 测试关系型数据库][chapter_4_rdbs]
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
@@ -40,6 +41,7 @@
 [chapter_2_s2_active_profile]: chapter_2_s2_active_profile.md
 [chapter_2_s3_json_test]: chapter_2_s3_json_test.md
 [chapter_2_s4_override_auto_configuration]: chapter_2_s4_override_auto_configuration.md
+[chapter_2_s5_test_configuration]: chapter_2_s5_test_configuration.md
 
 [chapter_3_mockito]: chapter_3_mockito.md
 [chapter_4_rdbs]: chapter_4_rdbs.md
