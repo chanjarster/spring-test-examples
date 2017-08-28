@@ -14,6 +14,7 @@
     <module>mock</module>
     <module>rdbs</module>
     <module>mvc</module>
+    <module>configuration</module>
   </modules>
   
   <properties>

@@ -22,7 +22,6 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
 1. Chapter 6: 测试AOP
 1. [Chapter 7: 测试@Configuration][chapter_6_configuration]
-1. [Chapter 8: 测试@AutoConfiguration][chapter_7_auto_configuration]
 1. [附录I Spring Mock Objects][appendix_i]
 1. [附录II Spring Test Utils][appendix_ii]
 
@@ -46,6 +45,5 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
 [chapter_4_rdbs]: chapter_4_rdbs.md
 [chapter_5_mvc]: chapter_5_mvc.md
 [chapter_6_configuration]: chapter_6_configuration.md
-[chapter_7_auto_configuration]: chapter_7_auto_configuration.md
 [appendix_i]: appendix_i.md
 [appendix_ii]: appendix_ii.md

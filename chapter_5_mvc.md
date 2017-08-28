@@ -161,7 +161,7 @@ public class BootMvc_2_Test extends AbstractTestNGSpringContextTests {
 
 [chapter_3_mockito]: chapter_3_mockito.md
 [guide-testing-the-web-layer]: https://spring.io/guides/gs/testing-web/
-[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#testing
+[doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-WebApplicationContext]: https://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/html/integration-testing.html#testcontext-ctx-management-web
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
 [javadoc-AutoConfigureMockMvc]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/test/autoconfigure/web/servlet/AutoConfigureMockMvc.html
