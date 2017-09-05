@@ -1,4 +1,4 @@
-# Chapter 6: 测试@Configuration
+# Chapter 7: 测试@Configuration
 
 在Spring引入Java Config机制之后，我们会越来越多的使用@Configuration来注册Bean，并且Spring Boot更广泛地使用了这一机制，其提供的大量Auto Configuration大大简化了配置工作。那么问题来了，如何确保@Configuration和Auto Configuration按照预期运行呢，是否正确地注册了Bean呢？本章举例测试@Configuration和Auto Configuration的方法（因为Auto Configuration也是@Configuration，所以测试方法是一样的）。
 
