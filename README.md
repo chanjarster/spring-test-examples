@@ -20,7 +20,7 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
 1. [Chapter 3: 使用Mockito][chapter_3_mockito]
 1. [Chapter 4: 测试关系型数据库][chapter_4_rdbs]
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
-1. Chapter 6: 测试AOP
+1. []Chapter 6: 测试AOP][chapter_6_aop]
 1. [Chapter 7: 测试@Configuration][chapter_7_configuration]
 1. [Chapter 8: 共享测试配置][chapter_8_share_test_config]
 1. [附录I Spring Mock Objects][appendix_i]
@@ -45,6 +45,7 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
 [chapter_3_mockito]: chapter_3_mockito.md
 [chapter_4_rdbs]: chapter_4_rdbs.md
 [chapter_5_mvc]: chapter_5_mvc.md
+[chapter_6_aop]: chapter_6_aop.md
 [chapter_7_configuration]: chapter_7_configuration.md
 [chapter_8_share_test_config]: chapter_8_share_test_config.md
 [appendix_i]: appendix_i.md

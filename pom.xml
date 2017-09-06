@@ -16,6 +16,7 @@
     <module>mvc</module>
     <module>configuration</module>
     <module>share-config</module>
+    <module>aop</module>
   </modules>
   
   <properties>

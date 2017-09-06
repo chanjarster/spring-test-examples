@@ -321,6 +321,7 @@ public class BarConfigurationTest {
 [javadoc-spring-environment]: https://docs.spring.io/spring/docs/4.3.9.RELEASE/javadoc-api/org/springframework/core/env/Environment.html
 [javadoc-spring-boot-ConditionalOnProperty]: https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/autoconfigure/condition/ConditionalOnProperty.html
 [javadoc-spring-boot-property-place-holder-auto-configuration]: https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/autoconfigure/context/PropertyPlaceholderAutoConfiguration.html
+[javadoc-spring-boot-EnvironmentTestUtils]: https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/api/org/springframework/boot/test/util/EnvironmentTestUtils.html
 [doc-spring-framework-testing]: http://docs.spring.io/spring/docs/4.3.9.RELEASE/spring-framework-reference/htmlsingle/#testing
 [doc-spring-boot-testing]: http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-testing
 [doc-spring-boot-conditionals]: https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-condition-annotations
