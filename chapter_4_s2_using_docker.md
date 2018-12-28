@@ -176,8 +176,8 @@ a1f4b51d7c75  mysql:8   ...      ...      Up 19...  33060/tcp, 0.0.0.0:32798->33
 
 ## 参考文档
 
-[Fabric8 dmp][fabric8-dmp]
-[Spring boot - Externalized Configuration][doc-spring-boot-ext-config]
+* [Fabric8 dmp][fabric8-dmp]
+* [Spring boot - Externalized Configuration][doc-spring-boot-ext-config]
 
 
 [chapter_4_s1_basic]: chapter_4_s1_basic.md
