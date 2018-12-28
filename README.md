@@ -18,7 +18,9 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
     1. [@OverrideAutoConfiguration][chapter_2_s4_override_auto_configuration]
     1. [@TestConfiguration][chapter_2_s5_test_configuration]
 1. [Chapter 3: 使用Mockito][chapter_3_mockito]
-1. [Chapter 4: 测试关系型数据库][chapter_4_rdbs]
+1. Chapter 4: 测试关系型数据库
+    1. [基本做法][chapter_4_s1_basic]
+    1. [使用Docker创建临时数据库][chapter_4_s2_using_docker]
 1. [Chapter 5: 测试Spring MVC][chapter_5_mvc]
 1. [Chapter 6: 测试AOP][chapter_6_aop]
 1. [Chapter 7: 测试@Configuration][chapter_7_configuration]
@@ -43,7 +45,10 @@ Spring、Spring Boot都提供了非常便利的测试工具，但遗憾的是官
 [chapter_2_s5_test_configuration]: chapter_2_s5_test_configuration.md
 
 [chapter_3_mockito]: chapter_3_mockito.md
-[chapter_4_rdbs]: chapter_4_rdbs.md
+
+[chapter_4_s1_basic]: chapter_4_s1_basic.md
+[chapter_4_s2_using_docker]: chapter_4_s2_using_docker.md
+
 [chapter_5_mvc]: chapter_5_mvc.md
 [chapter_6_aop]: chapter_6_aop.md
 [chapter_7_configuration]: chapter_7_configuration.md

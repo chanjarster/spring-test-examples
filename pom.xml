@@ -13,6 +13,7 @@
     <module>annotation</module>
     <module>mock</module>
     <module>rdbs</module>
+    <module>rdbs-docker</module>
     <module>mvc</module>
     <module>configuration</module>
     <module>share-config</module>
@@ -33,7 +34,7 @@
     <commons-collections4.version>4.1</commons-collections4.version>
 
     <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
-    <maven.failsafe.plugin.version>2.19</maven.failsafe.plugin.version>
+    <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
     <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
     <jacoco.maven.plugin.version>0.7.9</jacoco.maven.plugin.version>
     <flyway.maven.plugin.version>3.2.1</flyway.maven.plugin.version>
@@ -140,35 +141,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${maven.failsafe.plugin.version}</version>
-          <executions>
-            <execution>
-              <id>integration-test</id>
-              <goals>
-                <goal>integration-test</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>verify</id>
-              <goals>
-                <goal>verify</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <systemPropertyVariables>
-              <!--
-                spring.config.location的值是spring配置文件的路径, 这些文件供集成测试使用,
-                这样就将spring的配置外部化了, 便于集成测试的灵活配置,
-
-                spring.config.location的值应该在.m2/settings.xml的profile中配置,
-                如此在使用mvn clean integration-test时就能够通过指定profile来使用不同的配置
-
-                关于spring.config.location的文档在这里:
-                http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-application-property-files
-              -->
-              <spring.config.location>${spring.config.location}</spring.config.location>
-            </systemPropertyVariables>
-          </configuration>
         </plugin>
 
         <plugin>
@@ -225,6 +197,7 @@
           </executions>
         </plugin>
         
+
       </plugins>
     </pluginManagement>
 

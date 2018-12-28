@@ -1,4 +1,4 @@
-# Chapter 4: 测试关系型数据库
+# Chapter 4: 测试关系型数据库 - 基本做法
 
 [Spring Test Framework][doc-spring-framework-testing]提供了对[JDBC的支持][doc-spring-testing-jdbc]，能够让我们很方便对关系型数据库做集成测试。
 
