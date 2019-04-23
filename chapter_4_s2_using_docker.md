@@ -25,16 +25,7 @@ So, Docker comes to the rescue。
 
 请查阅官方文档。并且掌握Docker的基本概念。
 
-## 配置fabric8 docker-maven-plugin
-
-[farbic8 docker-maven-plugin][fabric8-dmp]顾名思义就是一个能够使用docker的maven plugin。它主要功能有二：
-
-1. [创建Docker image][fabric8-dmp-build]
-2. [启动Docker container][fabric8-dmp-start]
-
-我们这里使用**启动Docker container**的功能。
-
-大致配置如下
+## 配置properties
 
 先定义几个properties：
 
@@ -51,6 +42,17 @@ So, Docker comes to the rescue。
   <skipUTs>${skipTests}</skipUTs>
 </properties>
 ```
+
+## 配置fabric8 docker-maven-plugin
+
+[farbic8 docker-maven-plugin][fabric8-dmp]顾名思义就是一个能够使用docker的maven plugin。它主要功能有二：
+
+1. [创建Docker image][fabric8-dmp-build]
+2. [启动Docker container][fabric8-dmp-start]
+
+我们这里使用**启动Docker container**的功能。
+
+大致配置如下
 
 ```xml
  <plugin>
