@@ -14,7 +14,15 @@
 
   <properties>
     <fabric8.dmp.version>0.28.0</fabric8.dmp.version>
+    <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>2.19</maven-failsafe-plugin.version>
 
+    <!-- 跳过所有测试的flag -->
+    <skipTests>false</skipTests>
+    <!-- 跳过集成测试的flag -->
+    <skipITs>${skipTests}</skipITs>
+    <!-- 跳过单元测试的flag -->
+    <skipUTs>${skipTests}</skipUTs>
   </properties>
 
   <dependencies>
@@ -68,13 +76,33 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <!-- Spring Boot 2 和 maven-failsafe-plugin:2.19 存在一些问题需要这个workaround
+        详见这个：https://stackoverflow.com/a/42128153/1287790-->
+<!--        <configuration>-->
+<!--          <classifier>exec</classifier>-->
+<!--        </configuration>-->
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <skipTests>${skipUTs}</skipTests>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin.version}</version>
         <executions>
           <execution>
             <id>integration-test</id>
@@ -90,6 +118,13 @@
           </execution>
         </executions>
         <configuration>
+          <!-- 当skipTests的时候, 跳过 -->
+          <skipTests>${skipTests}</skipTests>
+          <!-- 当skipITs的时候, 跳过 -->
+          <skipITs>${skipITs}</skipITs>
+          <!-- 我们被测的是一个Spring Boot项目，因此可以通过System Properties把MySQL container的相关信息传递给程序
+          详见文档：https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/html/boot-features-external-config.html
+          -->
           <systemPropertyVariables>
             <spring.datasource.url>jdbc:mysql://localhost:${docker-mysql.port}/test</spring.datasource.url>
             <spring.datasource.username>foo</spring.datasource.username>
@@ -102,23 +137,30 @@
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <version>${fabric8.dmp.version}</version>
-
         <configuration>
+          <!--  当skipITs的时候，跳过 -->
+          <skip>${skipITs}</skip>
           <images>
-            <!-- A single's image configuration -->
             <image>
+              <!-- 使用mysql:8 docker image -->
               <name>mysql:8</name>
+              <!-- 定义docker run mysql:8 时的参数 -->
               <run>
                 <ports>
+                  <!-- host port到container port的映射
+                  这里随机选择一个host port，并将值存到property docker-mysql.port里 -->
                   <port>docker-mysql.port:3306</port>
                 </ports>
+                <!-- 启动时给的环境变量，参阅文档：https://hub.docker.com/_/mysql -->
                 <env>
                   <MYSQL_ROOT_PASSWORD>123456</MYSQL_ROOT_PASSWORD>
                   <MYSQL_DATABASE>test</MYSQL_DATABASE>
                   <MYSQL_USER>foo</MYSQL_USER>
                   <MYSQL_PASSWORD>bar</MYSQL_PASSWORD>
                 </env>
+                <!-- 设置判定container启动成功的的条件及timeout -->
                 <wait>
+                  <!-- 如果container打出了这行日志，则说明容器启动成功 -->
                   <log>MySQL init process done. Ready for start up.</log>
                   <time>120000</time>
                 </wait>
@@ -127,11 +169,9 @@
           </images>
         </configuration>
 
-        <!-- Connect start/stop to pre- and
-             post-integration-test phase, respectively if you want to start
-             your docker containers during integration tests -->
         <executions>
           <execution>
+            <!-- 在集成测试开始前启动容器 -->
             <id>start</id>
             <phase>pre-integration-test</phase>
             <goals>
@@ -139,6 +179,7 @@
             </goals>
           </execution>
           <execution>
+            <!-- 在集成测试结束后停止并删除容器 -->
             <id>stop</id>
             <phase>post-integration-test</phase>
             <goals>

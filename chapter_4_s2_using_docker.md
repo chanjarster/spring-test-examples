@@ -36,13 +36,31 @@ So, Docker comes to the rescue。
 
 大致配置如下
 
+先定义几个properties：
+
+```xml
+<properties>
+  <fabric8.dmp.version>0.28.0</fabric8.dmp.version>
+  <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+  <maven-failsafe-plugin.version>2.19</maven-failsafe-plugin.version>
+  <!-- 跳过所有测试的flag -->
+  <skipTests>false</skipTests>
+  <!-- 跳过集成测试的flag -->
+  <skipITs>${skipTests}</skipITs>
+  <!-- 跳过单元测试的flag -->
+  <skipUTs>${skipTests}</skipUTs>
+</properties>
+```
+
 ```xml
  <plugin>
    <groupId>io.fabric8</groupId>
    <artifactId>docker-maven-plugin</artifactId>
-   <version>0.28.0</version>
+   <version>${fabric8.dmp.version}</version>
 
    <configuration>
+     <!--  当skipITs的时候，跳过 -->
+     <skip>${skipITs}</skip>
      <images>
        <image>
          <!-- 使用mysql:8 docker image -->
@@ -95,10 +113,13 @@ So, Docker comes to the rescue。
 
 ## 配置maven-failsafe-plugin
 
+maven-failsafe-plugin用来执行集成测试`*IT.java`。
+
 ```xml
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-failsafe-plugin</artifactId>
+  <version>${maven-failsafe-plugin.version}</version>
   <executions>
     <execution>
       <id>integration-test</id>
@@ -114,6 +135,10 @@ So, Docker comes to the rescue。
     </execution>
   </executions>
   <configuration>
+    <!-- 当skipTests的时候, 跳过 -->
+    <skipTests>${skipTests}</skipTests>
+    <!-- 当skipITs的时候, 跳过 -->
+    <skipITs>${skipITs}</skipITs>
     <!-- 我们被测的是一个Spring Boot项目，因此可以通过System Properties把MySQL container的相关信息传递给程序
     详见文档：https://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/html/boot-features-external-config.html
     -->
@@ -126,6 +151,21 @@ So, Docker comes to the rescue。
 </plugin>
 ```
 
+## 配置maven-surefire-plugin
+
+maven-surefire-plugin用来执行单元测试`*Test.java`。
+
+```xml
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <version>${maven-surefire-plugin.version}</version>
+  <configuration>
+    <skipTests>${skipUTs}</skipTests>
+  </configuration>
+</plugin>
+```
+
 ## 执行
 
 三种常见用法：
@@ -133,6 +173,8 @@ So, Docker comes to the rescue。
 * `mvn clean integration-test`，会启动docker container、运行集成测试。这个很有用，如果集成测试失败，那么你还可以连接到MySQL数据库查看情况。
 * `mvn clean verify`，会执行`mvn integration-test`、删除docker container。
 * `mvn clean install`，会执`mvn verify`，并将包安装到本地maven 仓库。
+
+配合`-DskipTests`、`-DskipITs`、`-DskipUTs`可以控制是否跳过所有测试、紧跳过集成测试、仅跳过单元测试。
 
 下面是`mvn clean verify`的日志：
 
@@ -173,6 +215,44 @@ So, Docker comes to the rescue。
 CONTAINER ID  IMAGE     COMMAND  CREATED  STATUS    PORTS                                NAMES
 a1f4b51d7c75  mysql:8   ...      ...      Up 19...  33060/tcp, 0.0.0.0:32798->3306/tcp   mysql-1
 ```
+
+## 在Intellij IDEA中运行JUnit的问题
+
+本文中用到的pom.xml同样可适用于JUnit编写的单元、集成测试。
+
+在Intellij IDEA中直接执行JUnit测试的时候会读取maven-failsafe-plugin的`systemPropertyVariables`，这样会产生问题：
+你想用一个临时的application.properties来执行JUnit测试，但是IDEA的JUnit插件读取了maven-failsafe-plugin的`systemPropertyVariables`，
+而这些东西覆盖了application.properties里的内容，并且它们的值还可能是错的。
+
+解决办法是将maven-failsafe-plugin和docker-maven-plugin放到profile中：
+
+```xml
+  <profiles>
+    <profile>
+      <id>integration-test</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${maven-failsafe-plugin.version}</version>
+            ...
+          </plugin>
+
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${fabric8.dmp.version}</version>
+            ...
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+```
+
+然后使用`mvn clean install -Pintegration-test`来启用它。
 
 ## 参考文档
 
